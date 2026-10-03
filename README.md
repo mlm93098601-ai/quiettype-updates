@@ -1,6 +1,6 @@
 # QuietType 下载与更新
 
-当前版本：[QuietType 0.2.2](https://github.com/mlm93098601-ai/quiettype-updates/releases/tag/v0.2.2)。新增每位用户独立的本地常用词库，保持弱参考，改善中英文名称保留，并移除诊断及测试入口。已安装的朋友直接在设置中检查更新；首次安装仍使用下方完整安装包，再检查更新。
+当前版本：[QuietType 0.2.3](https://github.com/mlm93098601-ai/quiettype-updates/releases/tag/v0.2.3)。新增每位用户独立的本地常用词库，保持弱参考，改善中英文名称保留，并移除诊断及测试入口。已安装的朋友直接在设置中检查更新；首次安装仍使用下方完整安装包，再检查更新。
 
 Apple 芯片（M 系列）· macOS 26 或更高版本。语音识别和文字整理在本机运行。
 
