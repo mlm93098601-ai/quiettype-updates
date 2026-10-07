@@ -1,6 +1,6 @@
 # QuietType 下载与更新
 
-当前版本：[QuietType 0.2.6](https://github.com/mlm93098601-ai/quiettype-updates/releases/tag/v0.2.6)。清理口述停顿词，增强轻声波形反馈，并将邮箱、百分比等口述转换为 @、.、% 等对应符号。已安装的朋友直接在设置中检查更新；首次安装仍使用下方完整安装包，再检查更新。
+当前版本：[QuietType 0.2.7](https://github.com/mlm93098601-ai/quiettype-updates/releases/tag/v0.2.7)。增强讲话时各根声波的高低错落，并加入 Word 正文原生粘贴兼容修复。已安装的朋友直接在设置中检查更新；首次安装仍使用下方完整安装包，再检查更新。
 
 Apple 芯片（M 系列）· macOS 26 或更高版本。语音识别和文字整理在本机运行。
 
@@ -24,4 +24,4 @@ Apple 芯片（M 系列）· macOS 26 或更高版本。语音识别和文字整
 
 完整安装包包括离线模型和运行环境；普通更新只包含程序。此仓库不包含用户语音、历史记录或签名私钥。联网用于下载和软件更新，识别与整理仍在本机完成。
 
-源码：[下载最新源码（0.2.6，非编译版）](https://github.com/mlm93098601-ai/quiettype-updates/releases/latest/download/QuietType-Source.zip)
+源码：[下载最新源码（0.2.7，非编译版）](https://github.com/mlm93098601-ai/quiettype-updates/releases/latest/download/QuietType-Source.zip)
