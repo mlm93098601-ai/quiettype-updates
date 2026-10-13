@@ -115,6 +115,39 @@ fn preparation_command(
     }
 }
 
+fn download_command(destination: &Path, url: &str) -> Result<Command, String> {
+    let mut command = Command::new("/usr/bin/curl");
+    command
+        .args([
+            "--fail",
+            "--silent",
+            "--show-error",
+            "--location",
+            "--retry",
+            "3",
+            "--retry-all-errors",
+            "--connect-timeout",
+            "20",
+            "--speed-time",
+            "60",
+            "--speed-limit",
+            "1024",
+            "--proto",
+            "=https",
+            "--proto-redir",
+            "=https",
+            "--continue-at",
+            "-",
+            "--output",
+        ])
+        .arg(destination)
+        .arg(url);
+    if let Some(proxy) = crate::native::util_helper::download_proxy()? {
+        command.arg("--proxy").arg(proxy);
+    }
+    Ok(command)
+}
+
 pub(super) fn prepare(
     manifest_path: &Path,
     data: &Path,
@@ -157,31 +190,7 @@ pub(super) fn prepare(
                     let mut percent = None;
                     preparation_command(
                         runtime,
-                        Command::new("/usr/bin/curl")
-                            .args([
-                                "--fail",
-                                "--silent",
-                                "--show-error",
-                                "--location",
-                                "--retry",
-                                "3",
-                                "--retry-all-errors",
-                                "--connect-timeout",
-                                "20",
-                                "--speed-time",
-                                "60",
-                                "--speed-limit",
-                                "1024",
-                                "--proto",
-                                "=https",
-                                "--proto-redir",
-                                "=https",
-                                "--continue-at",
-                                "-",
-                                "--output",
-                            ])
-                            .arg(&partial)
-                            .arg(&part.url),
+                        &mut download_command(&partial, &part.url)?,
                         || {
                             let received = fs::metadata(&partial)
                                 .map(|m| m.len())
@@ -263,6 +272,17 @@ pub(super) fn prepare(
 mod tests {
     use super::*;
 
+    fn init_native() {
+        static INIT: std::sync::Once = std::sync::Once::new();
+        INIT.call_once(|| {
+            crate::native::util_helper::init_from_path(
+                &PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+                    .join("../lib/swift/build/libUtilHelper.dylib"),
+            )
+            .unwrap();
+        });
+    }
+
     #[test]
     fn download_manifest_rejects_wrong_hosts_paths_hashes_and_size() {
         let text = r#"{"version":1,"bytes":3,"expandedBytes":4,"sha256":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","parts":[{"name":"QuietType-Runtime-v1.tar.gz.part01","bytes":3,"sha256":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","url":"https://github.com/mlm93098601-ai/quiettype-updates/releases/download/runtime-v1/QuietType-Runtime-v1.tar.gz.part01"}]}"#;
@@ -298,8 +318,44 @@ mod tests {
     }
 
     #[test]
+    #[ignore = "Verifies public download with system proxy and no terminal proxy variables"]
+    fn public_system_proxy_download() {
+        init_native();
+        let output =
+            std::env::temp_dir().join(format!("quiettype-network-check-{}", std::process::id()));
+        assert!(!output.exists());
+        let mut command = download_command(&output,
+            "https://github.com/mlm93098601-ai/quiettype-updates/releases/download/runtime-v1/runtime-download.json").unwrap();
+        for name in [
+            "HTTP_PROXY",
+            "HTTPS_PROXY",
+            "ALL_PROXY",
+            "NO_PROXY",
+            "http_proxy",
+            "https_proxy",
+            "all_proxy",
+            "no_proxy",
+        ] {
+            command.env_remove(name);
+        }
+        command.args(["--max-time", "30"]);
+        let result = preparation_command(&LocalRuntime::default(), &mut command, || {});
+        let bytes = fs::read(&output);
+        let _ = fs::remove_file(&output);
+        result.unwrap();
+        assert_eq!(
+            bytes.unwrap(),
+            fs::read(
+                PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../release/runtime-download.json")
+            )
+            .unwrap()
+        );
+    }
+
+    #[test]
     #[ignore = "Downloads the public runtime into an explicitly selected disposable directory"]
     fn public_first_install() {
+        init_native();
         let data = PathBuf::from(
             std::env::var("QUIETTYPE_RUNTIME_INSTALL_CHECK")
                 .expect("Choose a disposable test directory"),

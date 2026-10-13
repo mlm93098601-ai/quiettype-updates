@@ -8,12 +8,33 @@ static LIB: OnceLock<Library> = OnceLock::new();
 
 pub fn init(app: &AppHandle) -> Result<(), String> {
     let path = super::dylib_path(app, "libUtilHelper.dylib");
+    init_from_path(&path)
+}
+
+pub(crate) fn init_from_path(path: &std::path::Path) -> Result<(), String> {
     log::info!("Loading UtilHelper dylib from {:?}", path);
     let lib = unsafe { Library::new(&path) }
         .map_err(|e| format!("Failed to load libUtilHelper.dylib from {:?}: {}", path, e))?;
     LIB.set(lib)
         .map_err(|_| "libUtilHelper already initialized".to_string())?;
     Ok(())
+}
+
+pub fn download_proxy() -> Result<Option<String>, String> {
+    unsafe {
+        let function: Symbol<unsafe extern "C" fn(*mut std::os::raw::c_char, u32) -> u32> = lib()?
+            .get(b"quiet_download_proxy")
+            .map_err(|e| e.to_string())?;
+        let mut bytes = [0u8; 4096];
+        if function(bytes.as_mut_ptr().cast(), bytes.len() as u32) > bytes.len() as u32 {
+            return Err("系统代理地址过长，请检查网络设置".into());
+        }
+        let value = CStr::from_bytes_until_nul(&bytes)
+            .map_err(|e| e.to_string())?
+            .to_str()
+            .map_err(|e| e.to_string())?;
+        Ok((!value.is_empty()).then(|| value.to_owned()))
+    }
 }
 
 fn lib() -> Result<&'static Library, String> {

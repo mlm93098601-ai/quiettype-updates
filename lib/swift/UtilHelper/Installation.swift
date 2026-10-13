@@ -1,4 +1,33 @@
 import AppKit
+import CFNetwork
+
+// Finder-launched apps do not inherit terminal proxy environment variables.
+@_cdecl("quiet_download_proxy")
+public func quietDownloadProxy(_ output: UnsafeMutablePointer<CChar>?, _ capacity: UInt32) -> UInt32 {
+    var value = ""
+    if let settings = CFNetworkCopySystemProxySettings()?.takeRetainedValue() {
+        let url = URL(string: "https://github.com/mlm93098601-ai/quiettype-updates/")!
+        let proxies = CFNetworkCopyProxiesForURL(url as CFURL, settings).takeRetainedValue() as NSArray
+        if let proxy = proxies.firstObject as? NSDictionary,
+           let type = proxy[kCFProxyTypeKey] as? String,
+           let host = proxy[kCFProxyHostNameKey] as? String,
+           let port = proxy[kCFProxyPortNumberKey] as? Int,
+           (1...65535).contains(port) {
+            var components = URLComponents()
+            if type == kCFProxyTypeHTTP as String || type == kCFProxyTypeHTTPS as String {
+                // macOS's HTTPS proxy is an HTTP CONNECT proxy for HTTPS targets.
+                components.scheme = "http"
+            } else if type == kCFProxyTypeSOCKS as String { components.scheme = "socks5h" }
+            components.host = host; components.port = port
+            if components.scheme != nil { value = components.string ?? "" }
+        }
+    }
+    let bytes = Array(value.utf8CString)
+    if let output, Int(capacity) >= bytes.count {
+        bytes.withUnsafeBufferPointer { output.update(from: $0.baseAddress!, count: $0.count) }
+    }
+    return UInt32(bytes.count)
+}
 
 func replaceInstallation(with staged: URL, at destination: URL) throws {
     let files = FileManager.default
