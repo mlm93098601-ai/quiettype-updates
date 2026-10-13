@@ -47,9 +47,11 @@ def main():
     run(PROJECT / 'vendor/Sparkle/bin/sign_update', '--account', config['keychain_account'], '--verify', feed)
     tree = ET.parse(feed)
     urls = [node.attrib['url'] for node in tree.findall('.//enclosure')]
+    notes = tree.findall('.//{http://www.andymatuschak.org/xml-namespaces/sparkle}releaseNotesLink')
+    urls.extend(node.text.strip() for node in notes if node.text)
     if not urls or any(not url.startswith(expected) for url in urls):
         p.error('Feed archive addresses do not match this repository')
-    # Release notes are embedded; every referenced archive must be present.
+    # Publish every file referenced by the signed feed, including release notes.
     assets = []
     for url in urls:
         file = updates / Path(urlparse(url).path).name
