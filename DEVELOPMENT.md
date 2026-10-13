@@ -54,4 +54,4 @@ Word、Codex 和网页编辑器优先使用原生粘贴动作，避免直接写�
 
 离线资源 v1 独立发布在 `runtime-v1`，不会成为 Latest。后续仅更新应用时复用资源，不重打模型；只有运行资源确实变化时才重新准备新资源版本、校验清单和下载兼容逻辑。打包脚本为 `scripts/package-runtime.py`，只包含准备好的运行资源，签名使用既有身份。
 
-检查：Cargo fmt/test/check、Swift NativeUICheck/InstallationCheck、Python test_server.py、scripts/test-package-runtime.py 和 scripts/test-release.py。实际公开下载首装可运行忽略的 `public_first_install` 集成检查，通过 `QUIETTYPE_RUNTIME_INSTALL_CHECK` 指定一个不存在的独立测试目录；它会下载完整资源，勿指向用户模型或设置目录。
+检查：Cargo fmt/test/check、Swift NativeUICheck/InstallationCheck、Python test_server.py、scripts/test-package-runtime.py 和 scripts/test-release.py。实际公开下载首装可运行忽略的 `public_first_install` 集成检查，通过 `QUIETTYPE_RUNTIME_INSTALL_CHECK` 指定一个不存在的独立测试目录；它会下载完整资源；网络失败后可在同一带测试标记的目录续传，勿指向用户模型或设置目录。

@@ -360,37 +360,34 @@ mod tests {
             std::env::var("QUIETTYPE_RUNTIME_INSTALL_CHECK")
                 .expect("Choose a disposable test directory"),
         );
-        assert!(!data.exists(), "Test directory must be new");
+        let marker = data.join(".public-install-check");
+        let resumed = data.exists();
+        if resumed {
+            assert_eq!(
+                fs::read_to_string(&marker).unwrap(),
+                "quiettype public install check v1\n"
+            );
+            assert!(!data.join("runtime-v1").exists(), "Check already completed");
+        } else {
+            fs::create_dir_all(&data).unwrap();
+            fs::write(&marker, "quiettype public install check v1\n").unwrap();
+        }
         let manifest =
             PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../release/runtime-download.json");
         let info: Manifest = serde_json::from_slice(&fs::read(&manifest).unwrap()).unwrap();
-        let partial = data
-            .join("runtime-download-v1")
-            .join(format!("{}.download", info.parts[0].name));
-        fs::create_dir_all(partial.parent().unwrap()).unwrap();
-        assert!(Command::new("/usr/bin/curl")
-            .args([
-                "--fail",
-                "--silent",
-                "--show-error",
-                "--location",
-                "--retry",
-                "3",
-                "--retry-all-errors",
-                "--connect-timeout",
-                "20",
-                "--range",
-                "0-1048575",
-                "--max-filesize",
-                "1048576",
-                "--output"
-            ])
-            .arg(&partial)
-            .arg(&info.parts[0].url)
-            .status()
-            .unwrap()
-            .success());
-        assert_eq!(fs::metadata(&partial).unwrap().len(), 1_048_576);
+        if !resumed {
+            let partial = data
+                .join("runtime-download-v1")
+                .join(format!("{}.download", info.parts[0].name));
+            fs::create_dir_all(partial.parent().unwrap()).unwrap();
+            let status = download_command(&partial, &info.parts[0].url)
+                .unwrap()
+                .args(["--range", "0-1048575", "--max-filesize", "1048576"])
+                .status()
+                .unwrap();
+            assert!(status.success());
+            assert_eq!(fs::metadata(&partial).unwrap().len(), 1_048_576);
+        }
         prepare(&manifest, &data, &LocalRuntime::default()).unwrap();
         assert!(installed(&data.join("runtime-v1")));
         assert!(!data.join("runtime-download-v1").exists());
