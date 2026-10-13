@@ -1,0 +1,50 @@
+import Foundation
+@main struct InputHelperCheck {
+    static func main() {
+        var session = InputSession()
+        assert(session.begin(1) && session.accepts(1))
+        assert(session.begin(2) && !session.accepts(1) && session.accepts(2))
+        session.clear()
+        assert(!session.accepts(2) && !session.begin(1) && !session.begin(2))
+        assert(session.begin(3) && session.accepts(3))
+        assert(editableRole("AXTextArea", selection: false, writable: false))
+        assert(editableRole("AXGroup", selection: true, writable: true))
+        assert(!editableRole("AXStaticText", selection: true, writable: false))
+        assert(!editableRole("AXButton", selection: false, writable: true))
+        assert(editableRole("AXGroup", selection: false, writable: false, explicitEditable: true))
+        assert(!editableRole("AXTextArea", selection: true, writable: true, explicitEditable: false))
+        assert(!editableRole("AXSecureTextField", selection: true, writable: true))
+        assert(focusedElementBelongsToApp(elementPID: 10, appPID: 10, reportedByApp: false, sameWindow: false))
+        assert(focusedElementBelongsToApp(elementPID: 11, appPID: 10, reportedByApp: true, sameWindow: false))
+        assert(focusedElementBelongsToApp(elementPID: 11, appPID: 10, reportedByApp: false, sameWindow: true))
+        assert(!focusedElementBelongsToApp(elementPID: 11, appPID: 10, reportedByApp: false, sameWindow: false))
+        assert(requiresSystemPaste(bundle: "com.todesktop.230313mzl4w4u92"))
+        assert(requiresSystemPaste(bundle: "com.google.Chrome"))
+        assert(requiresSystemPaste(bundle: "com.tencent.xinWeChat"))
+        assert(requiresSystemPaste(bundle: "com.microsoft.Word"))
+        assert(allowsDisabledDocument(bundle: "com.microsoft.Word", role: "AXTextArea", selection: true))
+        assert(!allowsDisabledDocument(bundle: "com.microsoft.Word", role: "AXTextArea", selection: false))
+        assert(!allowsDisabledDocument(bundle: "com.microsoft.Word", role: "AXButton", selection: true))
+        assert(!allowsDisabledDocument(bundle: "com.apple.TextEdit", role: "AXTextArea", selection: true))
+        assert(!requiresSystemPaste(bundle: "com.apple.TextEdit"))
+        assert(!requiresSystemPaste(bundle: nil))
+        assert(allowsWeChatMenuPaste(bundle: "com.tencent.xinWeChat", refusal: -6))
+        assert(allowsWeChatMenuPaste(bundle: "com.tencent.xinWeChat", refusal: -4))
+        for refusal: Int32 in [-1, -2, -3, -5, -7, -8, -9, -10, -11] {
+            assert(!allowsWeChatMenuPaste(bundle: "com.tencent.xinWeChat", refusal: refusal))
+        }
+        assert(!allowsWeChatMenuPaste(bundle: "com.apple.TextEdit", refusal: -6))
+        assert(!allowsWeChatMenuPaste(bundle: nil, refusal: -6))
+        assert(isNativePasteMenu(role: "AXMenuItem", identifier: "paste:", command: nil, modifiers: nil))
+        assert(isNativePasteMenu(role: "AXMenuItem", identifier: nil, command: "v", modifiers: 0))
+        assert(isNativePasteMenu(role: "AXMenuItem", identifier: nil, command: "V", modifiers: 0))
+        for modifiers in [1, 2, 4, 8] {
+            assert(!isNativePasteMenu(role: "AXMenuItem", identifier: nil, command: "v", modifiers: modifiers))
+        }
+        assert(!isNativePasteMenu(role: "AXButton", identifier: "paste:", command: "v", modifiers: 0))
+        assert(!isNativePasteMenu(role: "AXMenuItem", identifier: "copy:", command: "c", modifiers: 0))
+        assert(!isNativePasteMenu(role: "AXMenuItem", identifier: nil, command: nil, modifiers: 0))
+        assert(!isNativePasteMenu(role: "AXMenuItem", identifier: nil, command: "v", modifiers: nil))
+        print("Current-focus session cancellation and editable field checks passed")
+    }
+}

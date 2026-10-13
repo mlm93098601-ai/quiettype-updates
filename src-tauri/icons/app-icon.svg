@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- 背景渐变 -->
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#1a2438"/>
+      <stop offset="100%" stop-color="#0a0e18"/>
+    </radialGradient>
+
+    <!-- 波形条渐变 — 白→Codex蓝 -->
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#b0d8ff"/>
+      <stop offset="100%" stop-color="#339cff"/>
+    </linearGradient>
+
+    <!-- 中心辉光 -->
+    <radialGradient id="glow" cx="50%" cy="46%" r="30%">
+      <stop offset="0%" stop-color="#339cff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#339cff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 波形条发光滤镜 -->
+    <filter id="barGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- squircle 裁剪 -->
+    <clipPath id="squircle">
+      <rect x="0" y="0" width="1024" height="1024" rx="228" ry="228"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircle)">
+    <!-- 背景 -->
+    <rect width="1024" height="1024" fill="url(#bg)"/>
+    <rect width="1024" height="1024" fill="url(#glow)"/>
+
+    <!-- 5 根音频波形条 — 居中对称 -->
+    <g transform="translate(512, 472)" filter="url(#barGlow)">
+      <!-- 间距 72px, 条宽 28px, 圆角 14px -->
+      <rect x="-158" y="-56"  width="28" height="112" rx="14" fill="url(#bar)" opacity="0.7"/>
+      <rect x="-86"  y="-100" width="28" height="200" rx="14" fill="url(#bar)" opacity="0.8"/>
+      <rect x="-14"  y="-148" width="28" height="296" rx="14" fill="url(#bar)" opacity="1"/>
+      <rect x="58"   y="-100" width="28" height="200" rx="14" fill="url(#bar)" opacity="0.8"/>
+      <rect x="130"  y="-56"  width="28" height="112" rx="14" fill="url(#bar)" opacity="0.7"/>
+    </g>
+
+    <!-- AI 星火装饰 — 右上角三个小光点 -->
+    <circle cx="690" cy="280" r="5" fill="#339cff" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;0.3;0.6" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="724" cy="306" r="3.5" fill="#5bb8ff" opacity="0.4">
+      <animate attributeName="opacity" values="0.4;0.2;0.4" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="706" cy="256" r="2.5" fill="#88ccff" opacity="0.35"/>
+
+    <!-- 外圈微光（呼吸感） -->
+    <circle cx="512" cy="472" r="220" fill="none" stroke="#339cff" stroke-width="1" opacity="0.08"/>
+
+    <!-- 顶部光泽 -->
+    <rect width="1024" height="420" fill="url(#shine)" opacity="0.06"/>
+
+    <!-- 边框微光 -->
+    <rect width="1024" height="1024" rx="228" ry="228" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1.5"/>
+  </g>
+</svg>

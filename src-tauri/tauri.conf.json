@@ -1,0 +1,39 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "QuietType",
+  "version": "0.2.8",
+  "identifier": "com.ai-quick-input.assistant",
+  "build": {
+    "frontendDist": "../native-shell"
+  },
+  "app": {
+    "windows": [],
+    "security": {}
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "app"
+    ],
+    "icon": [
+      "icons/icon.icns"
+    ],
+    "resources": {
+      "../lib/swift/build/libInputHelper.dylib": "libInputHelper.dylib",
+      "../lib/swift/build/libUtilHelper.dylib": "libUtilHelper.dylib",
+      "../lib/swift/build/libNativeUI.dylib": "libNativeUI.dylib",
+      "../sidecar/local_speech/server.py": "local_speech/server.py",
+      "../sidecar/local_speech/vocabulary.py": "local_speech/vocabulary.py",
+      "../assets/sounds/soft.wav": "sounds/soft.wav",
+      "../assets/sounds/droplet.wav": "sounds/droplet.wav",
+      "../assets/sounds/tap.wav": "sounds/tap.wav",
+      "../release/runtime-download.json": "runtime-download.json"
+    },
+    "macOS": {
+      "entitlements": "Entitlements.plist",
+      "infoPlist": "Info.plist",
+      "minimumSystemVersion": "26.0"
+    }
+  },
+  "plugins": {}
+}

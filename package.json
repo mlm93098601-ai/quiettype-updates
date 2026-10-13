@@ -1,0 +1,12 @@
+{
+  "name": "quiettype",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "tauri": "tauri",
+    "build": "bash scripts/build-app.sh"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.11.1"
+  }
+}

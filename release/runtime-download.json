@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "bytes": 6774393228,
+  "expandedBytes": 8352902987,
+  "sha256": "c7140776625fb7754d5a25426868c3d18a699970fbf1463f3ca708cb1925a10e",
+  "parts": [
+    {
+      "name": "QuietType-Runtime-v1.tar.gz.part01",
+      "bytes": 1000000000,
+      "sha256": "868994fea692eaee815d6ae7cc95dd104ff3e5873fcff1b554263d1e8c399c55",
+      "url": "https://github.com/mlm93098601-ai/quiettype-updates/releases/download/runtime-v1/QuietType-Runtime-v1.tar.gz.part01"
+    },
+    {
+      "name": "QuietType-Runtime-v1.tar.gz.part02",
+      "bytes": 1000000000,
+      "sha256": "224df7f5e6e42d5229f6fef46ce557375c38e76efa6e228e49b79e59692c4d89",
+      "url": "https://github.com/mlm93098601-ai/quiettype-updates/releases/download/runtime-v1/QuietType-Runtime-v1.tar.gz.part02"
+    },
+    {
+      "name": "QuietType-Runtime-v1.tar.gz.part03",
+      "bytes": 1000000000,
+      "sha256": "44ad91127b6083eb74061b1ffc670dde5ab49361ae12a5dd68981e7f098f68ba",
+      "url": "https://github.com/mlm93098601-ai/quiettype-updates/releases/download/runtime-v1/QuietType-Runtime-v1.tar.gz.part03"
+    },
+    {
+      "name": "QuietType-Runtime-v1.tar.gz.part04",
+      "bytes": 1000000000,
+      "sha256": "ae35b59693084aa90bf276acebd435023127dded2e28689d2954957fe3bf10c1",
+      "url": "https://github.com/mlm93098601-ai/quiettype-updates/releases/download/runtime-v1/QuietType-Runtime-v1.tar.gz.part04"
+    },
+    {
+      "name": "QuietType-Runtime-v1.tar.gz.part05",
+      "bytes": 1000000000,
+      "sha256": "16606a9c35cd8a0eea98f6762135b59e7cc6a2893112ae3477ce10e59ad5a998",
+      "url": "https://github.com/mlm93098601-ai/quiettype-updates/releases/download/runtime-v1/QuietType-Runtime-v1.tar.gz.part05"
+    },
+    {
+      "name": "QuietType-Runtime-v1.tar.gz.part06",
+      "bytes": 1000000000,
+      "sha256": "546a81631b97347e95acc1b62bc37b26e4ef62c17ad24e6c4da987f66d6caa65",
+      "url": "https://github.com/mlm93098601-ai/quiettype-updates/releases/download/runtime-v1/QuietType-Runtime-v1.tar.gz.part06"
+    },
+    {
+      "name": "QuietType-Runtime-v1.tar.gz.part07",
+      "bytes": 774393228,
+      "sha256": "e3df268f46a127c6c7ad8b54d894bcdd9bd1308d3743a9bedeadba939c2c91a2",
+      "url": "https://github.com/mlm93098601-ai/quiettype-updates/releases/download/runtime-v1/QuietType-Runtime-v1.tar.gz.part07"
+    }
+  ]
+}
