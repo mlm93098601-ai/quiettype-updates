@@ -2,7 +2,16 @@
 
 轻声说话，自动整理并填入当前输入框；语音识别和文字整理均在 Mac 本机完成。
 
-## [⬇ 下载 QuietType · 最新版](https://github.com/mlm93098601-ai/quiettype-updates/releases/latest/download/QuietType.zip)
+<p align="center">
+  <a href="https://github.com/mlm93098601-ai/quiettype-updates/releases/latest/download/QuietType.zip">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/download/quiettype-transparent.png">
+      <img src="assets/download/quiettype-poster.png" width="360" alt="下载 QuietType 最新版 — 点击图片直接下载">
+    </picture>
+  </a>
+  <br>
+  <a href="https://github.com/mlm93098601-ai/quiettype-updates/releases/latest/download/QuietType.zip"><strong>⬇ 下载 QuietType · 最新版</strong></a>
+</p>
 
 **当前版本：[0.2.8](https://github.com/mlm93098601-ai/quiettype-updates/releases/tag/v0.2.8)** · Apple 芯片（M 系列）· macOS 26 或更高版本
 
