@@ -1,0 +1,11 @@
+{
+  "version": "0.3.0",
+  "notes": "Windows 本地语音输入；更新保留设置、词库、记录及离线语音文件。",
+  "pub_date": "2026-10-18T07:13:56.524165+00:00",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSSEFqUEpkclhwams4T0xjdHVJZTlPbHJuekhRY2duK0VkMFNOUno5SWJEdTJkRk1rVnNoT3o3NWxFbUdWQStTTENib3NHL1p2REdSLzJBQVN5QUErOWprald5N2RFendRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkyMzA3NjM1CWZpbGU6UXVpZXRUeXBlLVdpbmRvd3MtU2V0dXAuZXhlClRCK29GRXBsd05OUHJjQ3hsVHFaQTNmMG1adkZQSkU4N1gvaEpCRWZqUGFXM1VEQUovTzVCdVZ1Z1RXK2RKcVNnMVNubG1oVnRBVFVPYjlKWU00VUFRPT0K",
+      "url": "https://github.com/mlm93098601-ai/quiettype-updates/releases/download/windows-v0.3.0/QuietType-Windows-Setup.exe"
+    }
+  }
+}
