@@ -4,7 +4,7 @@
 
 | 平台 | 下载应用 | 下载源代码 |
 | --- | --- | --- |
-| Windows | **[Windows 最新版](https://github.com/mlm93098601-ai/quiettype-updates/releases/download/windows-v0.3.1/QuietType-Windows-Setup.exe)** | [Windows 源代码](https://github.com/mlm93098601-ai/quiettype-updates/releases/download/windows-v0.3.1/QuietType-Source.zip) |
+| Windows | **[Windows 最新版](https://github.com/mlm93098601-ai/quiettype-updates/releases/download/windows-v0.3.2/QuietType-Windows-Setup.exe)** | [Windows 源代码](https://github.com/mlm93098601-ai/quiettype-updates/releases/download/windows-v0.3.2/QuietType-Source.zip) |
 | Mac | **[Mac 最新版](https://github.com/mlm93098601-ai/quiettype-updates/releases/latest/download/QuietType.zip)** | [Mac 源代码](https://github.com/mlm93098601-ai/quiettype-updates/releases/latest/download/QuietType-Source.zip) |
 
 - **Windows：** Windows 11，x64 安装包兼容 ARM64 系统，建议 16 GB 内存。运行安装包后打开应用。

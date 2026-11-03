@@ -1,11 +1,11 @@
 {
-  "version": "0.3.1",
+  "version": "0.3.2",
   "notes": "Windows 本地语音输入；更新保留设置、词库、记录及离线语音文件。",
-  "pub_date": "2026-11-02T13:44:26.164612+00:00",
+  "pub_date": "2026-11-03T03:28:01.049337+00:00",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSSEFqUEpkclhwam9IT2ZLVUM4N3pVVCtDaWdabGlCYVFPZW0vRFRFNzdnWkZuWHRNdE4wU0RqRGFKVXg4QkF4RzlUSWNGOHlGNWlDZHVCWUgwTjR0V2ZJSnNZMlE4dUFnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkzNjI3MDUzCWZpbGU6UXVpZXRUeXBlLVdpbmRvd3MtU2V0dXAuZXhlClZ1eGpLSXFzZVBmWWhVaXdueVZSa3B3OEQ4ckxOOWpVeXpGQTlEMEZyNUR2Z1dXWmhWeWlHTDhHSjZ4WEVDTGlWNms3SFRpNXJub3VZMXV3TVJNckFBPT0K",
-      "url": "https://github.com/mlm93098601-ai/quiettype-updates/releases/download/windows-v0.3.1/QuietType-Windows-Setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSSEFqUEpkclhwam9tMVg1b29QNjZ1TFBYUTh6ZnNvMGxoU0JsdWhHQnhVcUhCT1JJZTRoR2tjeHBDWFJhVW1mMC9wMWlDYzR0MmlsenI2cVBBeFl6MHlQdkFtd2JZZkEwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkzNjc2NDcyCWZpbGU6UXVpZXRUeXBlLVdpbmRvd3MtU2V0dXAuZXhlCnFIMTBLVHVBNERja2FVcjZ5NUc1TFR5N3BObktqY1hhdGZSNkk5bHJ5UzlBV3A3K1JiVkxjWVMzREVjSmljN0diNmVoQVV3QmhoK0djOGlLc0tlUURnPT0K",
+      "url": "https://github.com/mlm93098601-ai/quiettype-updates/releases/download/windows-v0.3.2/QuietType-Windows-Setup.exe"
     }
   }
 }
